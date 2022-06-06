@@ -12,15 +12,23 @@ const fragment = document.createDocumentFragment();
 let carrito = {}
 
 // se espera a que cargue el DOM para llamar a la función
-document.addEventListener("DOMContentLoaded",() => {
+document.addEventListener("DOMContentLoaded", () => {
     obtenerCarrito();
     cards.addEventListener("click", e => {
         agregarCarrito(e);
     })
+    items.addEventListener("click", e => {
+        btnAccion(e);
+    })
+    //almaceno en local storage:
+    if(localStorage.getItem("carrito")) {
+        carrito = JSON.parse(localStorage.getItem("carrito"));
+        pintarCarrito();
+    }
 })
 
 // funcion que usa fetch para obtener el objeto de productos.json
-const obtenerCarrito = async() => {
+const obtenerCarrito = async () => {
     const responseCarrito = await fetch("productos.json");
     const productos = await responseCarrito.json();
     pintarCards(productos);
@@ -46,10 +54,10 @@ const pintarCards = productos => {
 const agregarCarrito = e => {
     // console.log(e.target);BORRARRRRRRRRRR
     // console.log(e.target.classList.contains("btn-dark"));BORRARRRRRRRRRR
-    if(e.target.classList.contains("btn-dark")){
-        setCarrito(e.target.parentElement);//obtengo todo el div 'card-body' y se lo paso como parametro a la funcion setCarrito
+    if (e.target.classList.contains("btn-dark")) {
+        setCarrito(e.target.parentElement); //obtengo todo el div 'card-body' y se lo paso como parametro a la funcion setCarrito
     }
-    e.stopPropagation();//para detener otros eventos(click en precio, titulo, img...)
+    e.stopPropagation(); //para detener otros eventos(click en precio, titulo, img...)
 }
 
 const setCarrito = objeto => {
@@ -60,11 +68,13 @@ const setCarrito = objeto => {
         cantidad: 1
     }
     //uso hasOwnProperty para ver su la propiedad cantidad ya existe. Si ya existe accedemos solo a ese objeto, y una vez q accedemos le sumamos 1 a la cantidad
-    if(carrito.hasOwnProperty(producto.id)) {
+    if (carrito.hasOwnProperty(producto.id)) {
         producto.cantidad = carrito[producto.id].cantidad + 1;
     }
     //agrego el producto al carrito. si el producto ya existe solamente le sumo 1 a la cantidad
-    carrito[producto.id] = {...producto}
+    carrito[producto.id] = {
+        ...producto
+    }
     pintarCarrito();
 }
 
@@ -89,6 +99,9 @@ const pintarCarrito = () => {
     //agrego el clone al DOM
     items.appendChild(fragment);
     pintarFooter();
+
+    //Tambien uso esta funcion para guardar el carrito en local storage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 const pintarFooter = () => {
@@ -96,10 +109,16 @@ const pintarFooter = () => {
     footer.innerHTML = "";
     if (Object.keys(carrito).length === 0) {
         footer.innerHTML = '<th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>';
+        return; //sale de la funcion. no ejecuta el resto
     }
 
-    const nCantidad = Object.values(carrito).reduce((acc,{cantidad}) => acc + cantidad,0);
-    const nPrecio = Object.values(carrito).reduce((acc,{precio,cantidad}) => acc + cantidad*precio,0);
+    const nCantidad = Object.values(carrito).reduce((acc, {
+        cantidad
+    }) => acc + cantidad, 0);
+    const nPrecio = Object.values(carrito).reduce((acc, {
+        precio,
+        cantidad
+    }) => acc + cantidad * precio, 0);
 
     templateFooter.querySelectorAll("td")[0].textContent = nCantidad;
     templateFooter.querySelector("span").textContent = nPrecio;
@@ -108,4 +127,32 @@ const pintarFooter = () => {
     //agrego el clone al DOM con fragment
     fragment.appendChild(clone);
     footer.appendChild(fragment);
+
+    const btnVaciar = document.getElementById("vaciar-carrito");
+    btnVaciar.addEventListener("click", () => {
+        carrito = {};
+        pintarCarrito();
+    })
+}
+
+const btnAccion = e => {
+    //accion de aumentar
+    if (e.target.classList.contains("btn-info")) {
+        const producto = carrito[e.target.dataset.id];
+        producto.cantidad++;
+        carrito[e.target.dataset.id] = {
+            ...producto
+        };
+        pintarCarrito();
+    }
+    //accion de disminuir
+    if (e.target.classList.contains("btn-danger")) {
+        const producto = carrito[e.target.dataset.id];
+        producto.cantidad--;
+        if(producto.cantidad === 0)
+            delete carrito[e.target.dataset.id];
+        pintarCarrito();
+    }
+
+    e.stopPropagation(); //para detener otros eventos(click en precio, titulo, img...)
 }
