@@ -1,38 +1,38 @@
 [
     {
-      "precio": 500,
+      "precio": 100,
       "id": 1,
-      "title": "Café",
-      "thumbnailUrl": "https://picsum.photos/id/0/600"
+      "title": "Coca-Cola",
+      "thumbnailUrl": "https://d1on8qs0xdu5jz.cloudfront.net/webapp/images/productos/b/0000001000/1551.jpg"
     },
     {
-      "precio": 300,
+      "precio": 750,
       "id": 2,
       "title": "Pizza",
-      "thumbnailUrl": "https://picsum.photos/id/10/600"
+      "thumbnailUrl": "https://fastly.4sqi.net/img/general/600x600/501330909_L9Sid0f8qwrKJvdl4ax7pE6N-G32O814MKZnemei35I.jpg"
     },
     {
-      "precio": 100,
+      "precio": 600,
       "id": 3,
-      "title": "Agua",
-      "thumbnailUrl": "https://picsum.photos/id/20/600"
+      "title": "Hamburguesa",
+      "thumbnailUrl": "https://t1.rg.ltmcdn.com/es/posts/0/8/9/pan_para_hamburguesa_28980_600_square.jpg"
     },
     {
-      "precio": 50,
+      "precio": 350,
       "id": 4,
-      "title": "Sandía",
-      "thumbnailUrl": "https://picsum.photos/id/30/600"
+      "title": "Papas Fritas",
+      "thumbnailUrl": "https://www.cardamomo.news/__export/1621290930734/sites/debate/img/2021/05/17/papas_fritas_crop1621290739319.jpeg_1753094345.jpeg"
     },
     {
-      "precio": 10,
+      "precio": 500,
       "id": 5,
-      "title": "Mango",
-      "thumbnailUrl": "https://picsum.photos/id/40/600"
+      "title": "Helado",
+      "thumbnailUrl": "https://www.guiadelnino.com/var/guiadelnino.com/storage/images/recetas-para-ninos-y-bebes/helados-y-sorbetes/helado-de-almendras/15721-4-esl-ES/helado-de-almendras_w1140.jpg"
     },
     {
-      "precio": 150,
+      "precio": 200,
       "id": 6,
-      "title": "Chela",
-      "thumbnailUrl": "https://picsum.photos/id/50/600"
+      "title": "Cerveza",
+      "thumbnailUrl": "https://walmartgt.vtexassets.com/arquivos/ids/214384/Heineken-Cerveza-Botella-355ml-1-15686.jpg?v=637710651209830000"
     }
   ]
