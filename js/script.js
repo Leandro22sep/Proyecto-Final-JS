@@ -53,7 +53,7 @@ const pintarCards = productos => {
 
 const agregarCarrito = e => {
     if (e.target.classList.contains("btn-dark")) {
-        setCarrito(e.target.parentElement); //obtengo todo el div 'card-body' y se lo paso como parametro a la funcion setCarrito
+        (setCarrito(e.target.parentElement)); //obtengo todo el div 'card-body' y se lo paso como parametro a la funcion setCarrito
     }
     Toastify({
         text: "Producto Agregado al Carrito",
@@ -73,7 +73,7 @@ const setCarrito = objeto => {
         cantidad: 1
     }
     //uso hasOwnProperty para ver su la propiedad cantidad ya existe. Si ya existe accedemos solo a ese objeto, y una vez q accedemos le sumamos 1 a la cantidad
-    if (carrito.hasOwnProperty(producto.id)) {
+    if (carrito.hasOwnProperty(producto.id)) { 
         producto.cantidad = carrito[producto.id].cantidad + 1;
     }
     //agrego el producto al carrito. si el producto ya existe solamente le sumo 1 a la cantidad
@@ -84,7 +84,6 @@ const setCarrito = objeto => {
 }
 
 const pintarCarrito = () => {
-    console.log(carrito);
     //limpio el DOM
     items.innerHTML = "";
     //uso Object.values para poder usar la funcion forEach que no se puede usar en colecciones de objetos, pero si en arreglos de objetos
@@ -175,9 +174,10 @@ const btnAccion = e => {
                 background: "linear-gradient(to right, red, #f86f6f)",
             }
         }).showToast();
-        if(producto.cantidad === 0)
-            delete carrito[e.target.dataset.id];
-        pintarCarrito();
+        if (producto.cantidad === 0) {
+            (delete carrito[e.target.dataset.id]);
+        }
+         pintarCarrito();
     }
 
     e.stopPropagation(); //para detener otros eventos(click en precio, titulo, img...)
