@@ -55,6 +55,13 @@ const agregarCarrito = e => {
     if (e.target.classList.contains("btn-dark")) {
         setCarrito(e.target.parentElement); //obtengo todo el div 'card-body' y se lo paso como parametro a la funcion setCarrito
     }
+    Toastify({
+        text: "Producto Agregado al Carrito",
+        duration: 3000,
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+        }
+    }).showToast();
     e.stopPropagation(); //para detener otros eventos(click en precio, titulo, img...)
 }
 
@@ -129,6 +136,13 @@ const pintarFooter = () => {
     const btnVaciar = document.getElementById("vaciar-carrito");
     btnVaciar.addEventListener("click", () => {
         carrito = {};
+        Toastify({
+            text: "Carrito Vaciado",
+            duration: 3000,
+            style: {
+                background: "linear-gradient(to right, red, #f86f6f)",
+            }
+        }).showToast();
         pintarCarrito();
     })
 }
@@ -138,6 +152,13 @@ const btnAccion = e => {
     if (e.target.classList.contains("btn-info")) {
         const producto = carrito[e.target.dataset.id];
         producto.cantidad++;
+        Toastify({
+            text: "Producto Agregado",
+            duration: 3000,
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            }
+        }).showToast();
         carrito[e.target.dataset.id] = {
             ...producto
         };
@@ -147,6 +168,13 @@ const btnAccion = e => {
     if (e.target.classList.contains("btn-danger")) {
         const producto = carrito[e.target.dataset.id];
         producto.cantidad--;
+        Toastify({
+            text: "Producto Eliminado",
+            duration: 3000,
+            style: {
+                background: "linear-gradient(to right, red, #f86f6f)",
+            }
+        }).showToast();
         if(producto.cantidad === 0)
             delete carrito[e.target.dataset.id];
         pintarCarrito();
