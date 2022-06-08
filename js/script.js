@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnAccion(e);
     })
     //almaceno en local storage:
-    if(localStorage.getItem("carrito")) {
+    if (localStorage.getItem("carrito")) {
         carrito = JSON.parse(localStorage.getItem("carrito"));
         pintarCarrito();
     }
@@ -73,7 +73,7 @@ const setCarrito = objeto => {
         cantidad: 1
     }
     //uso hasOwnProperty para ver su la propiedad cantidad ya existe. Si ya existe accedemos solo a ese objeto, y una vez q accedemos le sumamos 1 a la cantidad
-    if (carrito.hasOwnProperty(producto.id)) { 
+    if (carrito.hasOwnProperty(producto.id)) {
         producto.cantidad = carrito[producto.id].cantidad + 1;
     }
     //agrego el producto al carrito. si el producto ya existe solamente le sumo 1 a la cantidad
@@ -177,7 +177,7 @@ const btnAccion = e => {
         if (producto.cantidad === 0) {
             (delete carrito[e.target.dataset.id]);
         }
-         pintarCarrito();
+        pintarCarrito();
     }
 
     e.stopPropagation(); //para detener otros eventos(click en precio, titulo, img...)
