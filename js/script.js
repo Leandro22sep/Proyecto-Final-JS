@@ -52,8 +52,6 @@ const pintarCards = productos => {
 }
 
 const agregarCarrito = e => {
-    // console.log(e.target);BORRARRRRRRRRRR
-    // console.log(e.target.classList.contains("btn-dark"));BORRARRRRRRRRRR
     if (e.target.classList.contains("btn-dark")) {
         setCarrito(e.target.parentElement); //obtengo todo el div 'card-body' y se lo paso como parametro a la funcion setCarrito
     }

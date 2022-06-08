@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sweetalert2": "^11.4.17"
+    "sweetalert2": "^11.4.17",
+    "toastify-js": "^1.11.2"
   }
 }
